@@ -1,7 +1,8 @@
-.PHONY: help install lint lint-fix format-check format-fix typecheck build clean check-circular-deps checks dev serve
+.PHONY: help setup install lint lint-fix format-check format-fix typecheck build clean check-circular-deps checks dev serve
 
 help:
 	@echo "Available targets:"
+	@echo "  setup              - Setup Git LFS (run after cloning the repo)"
 	@echo "  install            - Install dependencies"
 	@echo "  lint               - Run ESLint"
 	@echo "  lint-fix           - Run ESLint with auto-fix"
@@ -14,6 +15,13 @@ help:
 	@echo "  dev                - Start development server"
 	@echo "  serve              - Serve the built project"
 	@echo "  clean              - Clean build artifacts"
+
+# Setup Git LFS to pull large files (mp4, webm, svg)
+# Run this after cloning the repository for the first time
+setup:
+	git lfs install
+	git lfs pull
+	git lfs checkout
 
 install:
 	npm ci
