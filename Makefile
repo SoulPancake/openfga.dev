@@ -1,4 +1,4 @@
-.PHONY: help setup install lint lint-fix format-check format-fix typecheck build clean check-circular-deps checks dev serve
+.PHONY: help setup install lint lint-fix format-check format-fix prettier-check prettier-write typecheck build clean check-circular-deps checks dev serve
 
 help:
 	@echo "Available targets:"
@@ -6,8 +6,10 @@ help:
 	@echo "  install            - Install dependencies"
 	@echo "  lint               - Run ESLint"
 	@echo "  lint-fix           - Run ESLint with auto-fix"
-	@echo "  format-check       - Check formatting with Prettier"
-	@echo "  format-fix         - Fix formatting with Prettier"
+	@echo "  format-check       - Check formatting with Prettier (src/**)"
+	@echo "  format-fix         - Fix formatting with Prettier (src/**)"
+	@echo "  prettier-check     - Check formatting with Prettier (supports FILES=...)"
+	@echo "  prettier-write     - Fix formatting with Prettier (supports FILES=...)"
 	@echo "  typecheck          - Run TypeScript type checking"
 	@echo "  check-circular-deps - Check for circular dependencies"
 	@echo "  build              - Build the project"
@@ -37,6 +39,16 @@ format-check:
 
 format-fix:
 	npm run format:fix
+
+# Check formatting with Prettier (use FILES=path/to/file to specify targets)
+# Example: make prettier-check FILES="src/components/**"
+prettier-check:
+	npx prettier --check $(if $(FILES),$(FILES),.)
+
+# Fix formatting with Prettier (use FILES=path/to/file to specify targets)
+# Example: make prettier-write FILES="src/components/**"
+prettier-write:
+	npx prettier --write $(if $(FILES),$(FILES),.)
 
 typecheck:
 	npm run typecheck
