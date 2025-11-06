@@ -149,7 +149,6 @@ await fgaClient.write({
     }
 
     case SupportedLanguage.GO_SDK: {
-      /* eslint-disable no-tabs */
       const writeTuples = opts.relationshipTuples
         ? opts.relationshipTuples
             .map(
@@ -377,7 +376,6 @@ response = await fga_client.write(body, options)
 
       return `${opts.relationshipTuples ? writes : ''}${separator}
 ${opts.deleteRelationshipTuples ? deletes : ''}`;
-      /* eslint-enable no-tabs */
     }
 
     case SupportedLanguage.JAVA_SDK: {
